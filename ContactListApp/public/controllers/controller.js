@@ -1,27 +1,26 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller('AppCtrl', function($scope, $http){
-	$scope.info = "I know thisss";
-	console.log("Hello from controller");
+myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
+    console.log("Hello World from controller");
 
-	var refresh = function(){
+var refresh = function(){
 
-	$http.get('/contactlist').success(function(response){
-	console.log("I got data requested");
-	$scope.contactlist = response;
-	$scope.contact = "";
-	});
-	};
-	
-	refresh();
+$http.get('/contactlist').success(function(response){
+ 	console.log("I got data requested");
+ 	$scope.contactlist = response;
+ 	$scope.contact = "";
+ });
+};
 
-	$scope.addContact = function(){
-		console.log($scope.contact);
-		$http.post('/contactlist', $scope.contact).success(function(response){
+refresh();
+
+$scope.addContact = function(){
+ 		console.log($scope.contact);
+ 		$http.post('/contactlist', $scope.contact).success(function(response){
 			console.log(response);
 			refresh();
 		});
-	};
+ 	};
 
 	$scope.remove = function(id){
 		console.log(id);
@@ -29,7 +28,7 @@ myApp.controller('AppCtrl', function($scope, $http){
 			console.log(response);
 			refresh();
 		});
-	};
+	 };
 
 	$scope.edit = function(id){
 		console.log(id);
@@ -49,5 +48,10 @@ myApp.controller('AppCtrl', function($scope, $http){
 		$scope.contact = "";
 	};
 
+}]);
 
-});
+
+
+
+
+// });
